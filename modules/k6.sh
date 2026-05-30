@@ -6,12 +6,6 @@ check_k6() {
 }
 
 install_k6() {
-  sudo tee /etc/yum.repos.d/k6.repo > /dev/null << 'EOF'
-[k6]
-name=k6
-baseurl=https://dl.k6.io/rpm/el8/$basearch
-enabled=1
-gpgcheck=0
-EOF
+  sudo dnf install -y https://dl.k6.io/rpm/repo.rpm
   sudo dnf install -y k6
 }
