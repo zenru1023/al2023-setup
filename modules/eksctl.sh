@@ -20,4 +20,13 @@ install_eksctl() {
   tar -xzf "$tmp_dir/eksctl.tar.gz" -C "$tmp_dir"
   sudo install -o root -g root -m 0755 "$tmp_dir/eksctl" /usr/local/bin/eksctl
   rm -rf "$tmp_dir"
+
+  local marker="# al2023-setup: eksctl"
+  if ! grep -qF "$marker" ~/.bashrc; then
+    cat >> ~/.bashrc << 'BASHRC'
+
+# al2023-setup: eksctl
+source <(eksctl completion bash)
+BASHRC
+  fi
 }

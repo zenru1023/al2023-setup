@@ -8,9 +8,17 @@ check_helm() {
 install_helm() {
   local tmp_dir
   tmp_dir="$(mktemp -d)"
-  trap 'rm -rf "$tmp_dir"' RETURN
-
   curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4 \
     -o "$tmp_dir/get-helm.sh"
   bash "$tmp_dir/get-helm.sh"
+  rm -rf "$tmp_dir"
+
+  local marker="# al2023-setup: helm"
+  if ! grep -qF "$marker" ~/.bashrc; then
+    cat >> ~/.bashrc << 'BASHRC'
+
+# al2023-setup: helm
+source <(helm completion bash)
+BASHRC
+  fi
 }
