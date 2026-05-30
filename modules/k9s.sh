@@ -13,15 +13,12 @@ install_k9s() {
     aarch64) arch_tag="arm64" ;;
     *)       die "k9s: unsupported architecture: $arch" ;;
   esac
-
   version="$(curl -fsSL https://api.github.com/repos/derailed/k9s/releases/latest \
     | grep '"tag_name"' | cut -d'"' -f4)"
   url="https://github.com/derailed/k9s/releases/download/${version}/k9s_Linux_${arch_tag}.tar.gz"
-
   tmp_dir="$(mktemp -d)"
-  trap 'rm -rf "$tmp_dir"' RETURN
-
   curl -fsSL "$url" -o "$tmp_dir/k9s.tar.gz"
   tar -xzf "$tmp_dir/k9s.tar.gz" -C "$tmp_dir" k9s
   sudo install -o root -g root -m 0755 "$tmp_dir/k9s" /usr/local/bin/k9s
+  rm -rf "$tmp_dir"
 }
