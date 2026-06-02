@@ -34,3 +34,7 @@ curl -fsSL https://raw.githubusercontent.com/zenru1023/al2023-setup/main/setup.s
 | yq        |
 | jq        |
 | terraform |
+
+## License
+
+This project is licensed under [BSD-3-Clause](LICENSE).
