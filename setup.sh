@@ -1,26 +1,9 @@
-#!/usr/bin/env bash
-# al2023-setup/setup.sh
-# Usage:
-#   bash setup.sh
-#   bash setup.sh --only kubectl,helm,k6
-#   bash setup.sh --exclude docker,k9s
-#   curl -fsSL https://raw.githubusercontent.com/zenru/al2023-setup/main/setup.sh | bash
-#   curl -fsSL https://raw.githubusercontent.com/zenru/al2023-setup/main/setup.sh | bash -s -- --only kubectl,helm
-
 set -euo pipefail
-
-# ─────────────────────────────────────────────
-# Config
-# ─────────────────────────────────────────────
 
 REPO_RAW="https://raw.githubusercontent.com/zenru1023/al2023-setup/main"
 
 # Canonical module order
 ALL_MODULES=(docker kubectl helm eksctl k9s k6 yq jq terraform)
-
-# ─────────────────────────────────────────────
-# Colors / logging
-# ─────────────────────────────────────────────
 
 BOLD='\033[1m'
 DIM='\033[2m'
@@ -38,10 +21,6 @@ log_error()   { echo -e "${RED}${BOLD}[ERR ]${RESET}  $*" >&2; }
 log_section() { echo -e "\n${BOLD}━━━  $*  ━━━${RESET}"; }
 
 die() { log_error "$*"; exit 1; }
-
-# ─────────────────────────────────────────────
-# Argument parsing
-# ─────────────────────────────────────────────
 
 ONLY_LIST=""
 EXCLUDE_LIST=""
@@ -68,10 +47,6 @@ done
 
 [[ -n "$ONLY_LIST" && -n "$EXCLUDE_LIST" ]] && die "--only and --exclude are mutually exclusive"
 
-# ─────────────────────────────────────────────
-# Helpers
-# ─────────────────────────────────────────────
-
 csv_contains() {
   local list="$1" item="$2"
   echo "$list" | tr ',' '\n' | grep -qx "$item"
@@ -97,12 +72,6 @@ validate_module_list() {
 
 validate_module_list "$ONLY_LIST"    "--only"
 validate_module_list "$EXCLUDE_LIST" "--exclude"
-
-# ─────────────────────────────────────────────
-# Module loader
-# Load from local ./modules/ if available,
-# otherwise fetch from GitHub raw.
-# ─────────────────────────────────────────────
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-./setup.sh}")" && pwd)"
 
