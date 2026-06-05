@@ -3,7 +3,7 @@ set -euo pipefail
 REPO_RAW="https://raw.githubusercontent.com/zenru1023/al2023-setup/main"
 
 # Canonical module order
-ALL_MODULES=(docker kubectl helm eksctl k9s k6 yq jq terraform)
+ALL_MODULES=(docker kubectl helm eksctl k9s k6 yq jq terraform krew)
 
 BOLD='\033[1m'
 DIM='\033[2m'
