@@ -24,16 +24,17 @@ curl -fsSL https://raw.githubusercontent.com/zenru1023/al2023-setup/main/setup.s
 
 ## Module List
 
-| Name      |
-| --------- |
-| docker    |
-| kubectl   |
-| helm      |
-| eksctl    |
-| k9s       |
-| yq        |
-| jq        |
-| terraform |
+| Name                          |
+| ----------------------------- |
+| docker                        |
+| kubectl                       |
+| helm                          |
+| eksctl                        |
+| k9s                           |
+| yq                            |
+| jq                            |
+| terraform                     |
+| krew (kubectl plugin manager) |
 
 ## License
 
